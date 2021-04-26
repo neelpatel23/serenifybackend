@@ -1,10 +1,14 @@
-[
-    {
-        "Name": "Neel Patel",
-        "Email": "neelp2023@gmail.com"
-    },
-    {
-        "Name": "Neel Ashok Patel",
-        "Email": "neelpatel777@yahoo.com"
-    }
-]
+{
+    "users": [
+        {
+            "name": "Molecule Man",
+            "age": 29,
+            "secretIdentity": "Dan Jukes",
+            "powers": [
+              "Radiation resistance",
+              "Turning tiny",
+              "Radiation blast"
+            ]
+          }
+    ]
+}
