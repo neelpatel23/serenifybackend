@@ -4,7 +4,7 @@ const sampleData = require("./data.json");
 let port = process.env.PORT || 8000;
 
 app.get("/", (req, res) => {
-    res.headersSent('Access-Control-Allow-Origin')
+    res.header('Access-Control-Allow-Origin')
     res.send("Hello World")
 })
 
