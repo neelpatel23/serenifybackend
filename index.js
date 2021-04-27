@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-const sampleData = require("./data.json");
+const bodyParser = require('body-parser');
 let port = process.env.PORT || 8000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -17,7 +20,7 @@ app.get("/", (req, res) => {
 app.get("/users", (req, res) => {
   res.send(
     {
-      "name": "Molecule Man",
+      "name": "Entry Name",
       "age": 29,
       "secretIdentity": "Dan Jukes",
       "powers": [
@@ -28,6 +31,12 @@ app.get("/users", (req, res) => {
     }
   )
 })
+
+app.post('/addusers', (req, res) => {
+  res.status(200)
+  res.send(`${req.body}`)
+});
+
 
 app.listen(port, () => {
   console.log(`Serenify Backend Server is running on ${port}`)
