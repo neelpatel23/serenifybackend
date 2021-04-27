@@ -15,7 +15,18 @@ app.get("/", (req, res) => {
 })
 
 app.get("/users", (req, res) => {
-  res.send(sampleData)
+  res.send(
+    {
+      "name": "Molecule Man",
+      "age": 29,
+      "secretIdentity": "Dan Jukes",
+      "powers": [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast"
+      ]
+    }
+  )
 })
 
 app.listen(port, () => {
