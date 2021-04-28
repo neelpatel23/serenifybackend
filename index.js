@@ -15,7 +15,8 @@ app.use(function(req, res, next) {
 
 app.get("/", (req, res) => {
   res.status(401)
-  res.send("Hello World")
+  res.statusCode = 401
+  res.send("You are unauthorized to access this endpoint, please contact your developer.")
 })
 
 app.get("/users", (req, res) => {
