@@ -36,7 +36,7 @@ app.get("/users", (req, res) => {
 
 app.post('/addusers', (req, res) => {
   res.status(200)
-  res.send(`This is what I've received ${req.body.title}`)
+  res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
 
