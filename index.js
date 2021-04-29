@@ -13,9 +13,8 @@ app.use(function(req, res, next) {
 });
 
 
-app.get("/", (req, res) => {
+app.get("/", (res) => {
   res.status(401)
-  res.statusCode = 401
   res.send("You are unauthorized to access this endpoint, please contact your developer.")
 })
 
@@ -41,5 +40,5 @@ app.post('/addusers', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Serenify Backend Server is running on ${port}`)
+  console.log(`Serenify Backend Server is running on port: ${port}`)
 })
