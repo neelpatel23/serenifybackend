@@ -6,12 +6,12 @@ let port = process.env.PORT || 8000;
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
 serenifyBase.use(bodyParser.json());
 
+
 serenifyBase.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
 
 serenifyBase.get("/", (req, res) => {
   res.status(401)
@@ -19,18 +19,16 @@ serenifyBase.get("/", (req, res) => {
 })
 
 serenifyBase.get("/users", (req, res) => {
-  res.send(
-    {
-      "name": "Neel Patel",
-      "age": 29,
-      "secretIdentity": "Dan Jukes",
-      "powers": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
-      ]
-    }
-  )
+  res.send({
+    "name": "Neel Patel",
+    "age": 29,
+    "secretIdentity": "Dan Jukes",
+    "powers": [
+      "Radiation resistance",
+      "Turning tiny",
+      "Radiation blast"
+    ]
+  });
 })
 
 serenifyBase.post('/addusers', (req, res) => {
@@ -41,8 +39,8 @@ serenifyBase.post('/addusers', (req, res) => {
 serenifyBase.get(`/assets/images/${1}`, (req, res) => {
   res.status(200)
   res.send("https://api.pcloud.com/getpubthumb?code=ujY&linkpassword=undefined&size=515x485&crop=0&type=auto")
+  res.send(req.header)
 })
-
 
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)
