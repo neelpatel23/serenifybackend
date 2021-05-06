@@ -14,7 +14,8 @@ module.exports = () => {
       jwt.verify(tokenBody, config.JWT_SECRET, (err, decoded) => {
         if(err) {
           console.log(`JWT Error; ${err}`);
-          return res.status(401).send("Access Denied")
+          return res.status(401)
+          .send("Access Denied")
         }
         next()
       });

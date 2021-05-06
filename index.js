@@ -47,11 +47,6 @@ serenifyBase.post('/addusers', (req, res) => {
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
-serenifyBase.get(`/assets/images/${1}`, auth(), (req, res) => {
-  res.status(200)
-  res.send("https://api.pcloud.com/getpubthumb?code=ujY&linkpassword=undefined&size=515x485&crop=0&type=auto")
-  res.send(req.header)
-})
 
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)
