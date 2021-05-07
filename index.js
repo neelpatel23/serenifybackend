@@ -9,7 +9,7 @@ let port = process.env.PORT || 8000;
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
 serenifyBase.use(bodyParser.json());
 
-serenifyBase.use(function(req, res, next) {
+serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
@@ -22,10 +22,12 @@ serenifyBase.get("/", (req, res) => {
 
 serenifyBase.get("/secure/token", (req, res) => {
   const payload = {
-    name: "Serenify"
+    name: "Serenify",
+    token: "JWT_SIGN"
   };
 
   const token = jwt.sign(payload, config.JWT_SECRET);
+  res.status(200)
   res.send(token)
 })
 
@@ -46,7 +48,6 @@ serenifyBase.post('/addusers', (req, res) => {
   res.status(200)
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
-
 
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)
