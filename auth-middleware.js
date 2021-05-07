@@ -3,7 +3,7 @@ const config = require("./config");
 
 module.exports = () => {
   return (req, res, next) => {
-    const token = req.headers["Authorization"];
+    const token = req.headers["authorization"];
     if(!token){
       return res.status(401).send("No Authentication Credentials were found.\n Access Denied")
     }
