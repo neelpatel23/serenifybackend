@@ -63,9 +63,13 @@ serenifyBase.post('/addusers', (req, res) => {
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
-serenifyBase.get('/daily/serenity/1', (req, res) => {
+serenifyBase.get('/daily/serenity/url', (req, res) => {
   res.status(200)
-  res.send(dailyserenity)
+  res.send("https://p-def7.pcloud.com/cBZ57t2tDZwFVqUTZ5zxL7ZZG34Xv7ZQ5ZZUV0ZkZswCo7Zf5ZNXZr0ZP5ZQ7ZdZ4kZrpZtHZBzZyzZepZU7ZeVZ4KgeXZu9u1wo1j2zQFbDWdb2USqYb5uoJk/production%20ID_4327208.mp4")
+})
+serenifyBase.get('/daily/serenity/team/name', (req, res) => {
+  res.status(200)
+  res.send("The Serenify Team")
 })
 
 serenifyBase.listen(port, () => {
