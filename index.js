@@ -65,7 +65,7 @@ serenifyBase.post('/addusers', (req, res) => {
 
 serenifyBase.get('/daily/serenity/url', (req, res) => {
   res.status(200)
-  res.send("https://p-def7.pcloud.com/cBZ57t2tDZwFVqUTZ5zxL7ZZG34Xv7ZQ5ZZUV0ZkZswCo7Zf5ZNXZr0ZP5ZQ7ZdZ4kZrpZtHZBzZyzZepZU7ZeVZ4KgeXZu9u1wo1j2zQFbDWdb2USqYb5uoJk/production%20ID_4327208.mp4")
+  res.send("https://c79.pcloud.com/dHZ5HPstDZwFVqUTZ5zxL7ZZfEbXv7ZQ5ZZUV0ZkZ4KgeXZCHWWVpjjjPmvFc4kB86iVBfoREqX/production%20ID_4327208.mp4")
 })
 serenifyBase.get('/daily/serenity/team/name', (req, res) => {
   res.status(200)
