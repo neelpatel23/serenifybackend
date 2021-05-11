@@ -69,7 +69,7 @@ serenifyBase.get('/daily/serenity/url', (req, res) => {
 })
 serenifyBase.get('/daily/serenity/team/name', (req, res) => {
   res.status(200)
-  res.send("The Serenity Team")
+  res.send("Daily Serenity by Neel")
 })
 
 serenifyBase.listen(port, () => {
