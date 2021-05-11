@@ -65,11 +65,11 @@ serenifyBase.post('/addusers', (req, res) => {
 
 serenifyBase.get('/daily/serenity/url', (req, res) => {
   res.status(200)
-  res.send("https://icecube-us-845.icedrive.io/download?p=vPECqDzfUDbvjOmRCIn4I08HOPjN8pRH11GQx81DyVH8Cnb7%2B6IhiOqKYrPOCSiUppQmnVzrEdxKPIGzcYmI5icSbRviG9YT1RpwKez%2FXvaOVgcLAs8WAwTxorYg4wQnx11jpe4VEkE4CxcX%2BsxXZEcUxDkCLqonF3XCoYzZVUIaYEXtua%2FC7hIrodypzqtvoSXtWpX0%2FGM3DmckCpWnaNFi7uLpW8vZBLlXXJSDnGY%3D")
+  res.send("https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/yt1s_com_Guruhari_Darshan_1113_Jan_2021_Nenpur_India_1080p_3.mp4")
 })
 serenifyBase.get('/daily/serenity/team/name', (req, res) => {
   res.status(200)
-  res.send("Daily Serenity by Neel")
+  res.send("The Serenify Team")
 })
 
 serenifyBase.listen(port, () => {
