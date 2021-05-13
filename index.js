@@ -58,14 +58,15 @@ serenifyBase.get("/users", auth(), (req, res) => {
   });
 })
 
-serenifyBase.post('/addusers', (req, res) => {
+serenifyBase.post('/addusers', auth(), (req, res) => {
   res.status(200)
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
 serenifyBase.get('/daily/serenity/url', (req, res) => {
   res.status(200)
-  res.send("https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/yt1s_com_Guruhari_Darshan_1113_Jan_2021_Nenpur_India_1080p_3.mp4")
+  res.send("https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/Divine%20Moods%20%283_21%29.mp4")
+  //https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/yt1s_com_Guruhari_Darshan_1113_Jan_2021_Nenpur_India_1080p_3.mp4
 })
 serenifyBase.get('/daily/serenity/team/name', (req, res) => {
   res.status(200)
