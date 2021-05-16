@@ -14,7 +14,7 @@ const todaysDate = moment().format('MMMM Do, YYYY');
 
 const daily = [
 	{
-		url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily1.jpeg',
+		url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily4.jpeg',
     type: 'image',
 		header: {
 			heading: 'Your Quotes',
@@ -22,7 +22,7 @@ const daily = [
 		},
 	},
   {
-    url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
+    url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily5.jpeg',
     type: 'image',
     header: {
       heading: 'Your Quotes',
@@ -30,7 +30,7 @@ const daily = [
     }
   },
   {
-    url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily3.jpeg',
+    url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
     type: 'image',
     header: {
       heading: 'Your Quotes',
@@ -45,7 +45,7 @@ serenifyBase.use((req, res, next) => {
   next();
 });
 
-serenifyBase.get("/", (req, res) => {
+serenifyBase.get("/", auth(), (req, res) => {
   res.status(401)
   res.send("You are unauthorized to access this endpoint, please contact your developer.")
 })
@@ -83,11 +83,6 @@ serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
   res.send(daily)
 })
-serenifyBase.get('/daily/serenity/team/name', (req, res) => {
-  res.status(200)
-  res.send("The Serenify Team")
-})
-
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)
 })
