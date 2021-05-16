@@ -12,15 +12,31 @@ serenifyBase.use(bodyParser.json());
 
 const todaysDate = moment().format('MMMM Do, YYYY');
 
-const dailyserenity = [
+const daily = [
 	{
-		url: 'https://p-def7.pcloud.com/cBZ57t2tDZwFVqUTZ5zxL7ZZG34Xv7ZQ5ZZUV0ZkZswCo7Zf5ZNXZr0ZP5ZQ7ZdZ4kZrpZtHZBzZyzZepZU7ZeVZ4KgeXZu9u1wo1j2zQFbDWdb2USqYb5uoJk/production%20ID_4327208.mp4',
-    type: "video",
+		url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily1.jpeg',
+    type: 'image',
 		header: {
-			heading: 'The Serenify Team',
+			heading: 'Your Quotes',
 			subheading: todaysDate
 		},
 	},
+  {
+    url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
+    type: 'image',
+    header: {
+      heading: 'Your Quotes',
+      subheading: todaysDate
+    }
+  },
+  {
+    url: 'https://neelp.sfo3.digitaloceanspaces.com/Serenify/stories/daily/daily3.jpeg',
+    type: 'image',
+    header: {
+      heading: 'Your Quotes',
+      subheading: todaysDate
+    }
+  },
 ];
 
 serenifyBase.use((req, res, next) => {
@@ -63,10 +79,9 @@ serenifyBase.post('/addusers', auth(), (req, res) => {
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
-serenifyBase.get('/daily/serenity/url', (req, res) => {
+serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
-  res.send("https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/Divine%20Moods%20%283_21%29.mp4")
-  //https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/yt1s_com_Guruhari_Darshan_1113_Jan_2021_Nenpur_India_1080p_3.mp4
+  res.send(daily)
 })
 serenifyBase.get('/daily/serenity/team/name', (req, res) => {
   res.status(200)
