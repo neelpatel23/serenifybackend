@@ -17,7 +17,7 @@ const daily = [
 		url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily4.jpeg',
     type: 'image',
 		header: {
-			heading: 'Your Quotes',
+			heading: 'Your Quotes by Serenify',
 			subheading: todaysDate
 		},
 	},
