@@ -5,6 +5,7 @@ const serenifyBase = express();
 const jwt = require('jsonwebtoken');
 const auth = require('./auth-middleware');
 const config = require('./config');
+const dailystories = require('./stories/dailystories.json');
 let port = process.env.PORT || 8000;
 
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
@@ -12,32 +13,32 @@ serenifyBase.use(bodyParser.json());
 
 const todaysDate = moment().format('MMMM Do, YYYY');
 
-const daily = [
-	{
-		url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily4.jpeg',
-    type: 'image',
-		header: {
-			heading: 'Your Quotes by Serenify',
-			subheading: todaysDate
-		},
-	},
-  {
-    url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily5.jpeg',
-    type: 'image',
-    header: {
-      heading: 'Your Quotes',
-      subheading: todaysDate
-    }
-  },
-  {
-    url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
-    type: 'image',
-    header: {
-      heading: 'Your Quotes',
-      subheading: todaysDate
-    }
-  },
-];
+// const daily = [
+// 	{
+// 		url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily4.jpeg',
+//     type: 'image',
+// 		header: {
+// 			heading: 'Your Quotes by Serenify',
+// 			subheading: todaysDate
+// 		},
+// 	},
+//   {
+//     url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily5.jpeg',
+//     type: 'image',
+//     header: {
+//       heading: 'Your Quotes',
+//       subheading: todaysDate
+//     }
+//   },
+//   {
+//     url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
+//     type: 'image',
+//     header: {
+//       heading: 'Your Quotes',
+//       subheading: todaysDate
+//     }
+//   },
+// ];
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -81,7 +82,7 @@ serenifyBase.post('/addusers', auth(), (req, res) => {
 
 serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
-  res.send(daily)
+  res.send(dailystories)
 })
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)

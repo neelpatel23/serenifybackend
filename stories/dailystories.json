@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/Divine%20Moods%20%283_21%29.mp4",
+    "type": "video",
+    "header": {
+      "heading": "Your Quotes",
+      "subheading": "Date"
+    }
+  },
+  {
+    "url": "https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily5.jpeg",
+    "type": "image",
+    "header": {
+      "heading": "Your Quotes",
+      "subheading": "Date"
+    }
+  },
+  {
+    "url": "https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg",
+    "type": "image",
+    "header": {
+      "heading": "Your Quotes",
+      "subheading": "Date"
+    }
+  }
+]
