@@ -11,7 +11,7 @@ module.exports = () => {
       const tokenBody = token.slice(7);
       jwt.verify(tokenBody, config.JWT_SECRET, (err, decoded) => {
         if(err) {
-          console.log(`JWT Error; ${err}`);
+          console.log(`JWT Error: ${err}`);
           return res.status(401)
           .send("Access Denied")
         }
