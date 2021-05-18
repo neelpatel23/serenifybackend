@@ -80,7 +80,7 @@ serenifyBase.post('/addusers', auth(), (req, res) => {
   res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
-serenifyBase.get('/daily/serenity', auth(), (req, res) => {
+serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
   res.send(dailystories)
 })
