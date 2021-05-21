@@ -5,40 +5,18 @@ const serenifyBase = express();
 const jwt = require('jsonwebtoken');
 const auth = require('./auth-middleware');
 const config = require('./config');
+// const MongoClient = require('mongodb').MongoClient
 const dailystories = require('./stories/dailystories.json');
+const dashboardData = require('./dashboard/home/dashboardata.json')
 let port = process.env.PORT || 8000;
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://neelp:<CSC603GwxtwjsXtm>@cluster0.bcu5n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
 serenifyBase.use(bodyParser.json());
 
 const todaysDate = moment().format('MMMM Do, YYYY');
-
-// const daily = [
-// 	{
-// 		url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily4.jpeg',
-//     type: 'image',
-// 		header: {
-// 			heading: 'Your Quotes by Serenify',
-// 			subheading: todaysDate
-// 		},
-// 	},
-//   {
-//     url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily5.jpeg',
-//     type: 'image',
-//     header: {
-//       heading: 'Your Quotes',
-//       subheading: todaysDate
-//     }
-//   },
-//   {
-//     url: 'https://neelp.sfo3.cdn.digitaloceanspaces.com/Serenify/stories/daily/daily2.jpeg',
-//     type: 'image',
-//     header: {
-//       heading: 'Your Quotes',
-//       subheading: todaysDate
-//     }
-//   },
-// ];
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -62,6 +40,22 @@ serenifyBase.get("/secure/token", (req, res) => {
   res.send(token)
 })
 
+serenifyBase.post("/users", (req, res) => {
+  MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err) return console.error(err);
+    const db = client.db('node-demo');
+    const collection = db.collection('users');
+    collection
+      .insertOne(req.body)
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(() => {
+        res.redirect('/');
+      });
+  });
+})
+
 serenifyBase.get("/users", auth(), (req, res) => {
   res.send({
     "name": "Neel Patel",
@@ -83,6 +77,11 @@ serenifyBase.post('/addusers', auth(), (req, res) => {
 serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
   res.send(dailystories)
+})
+
+serenifyBase.get('/dashboard_data', (req, res) => {
+  res.status(206)
+  res.send(dashboardData)
 })
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)

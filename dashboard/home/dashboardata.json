@@ -1,0 +1,30 @@
+{
+"dashboardData": [{
+            "id": 3200,
+            "status": "",
+            "calibrated": 1521135120000,
+            "location": {
+                    "latitude": -117.125,
+                    "longitude": 31.125
+            }
+    },
+    {
+        "id": 5416,
+        "status": "offline",
+        "calibrated": 1521638100000,
+        "location": {
+                "latitude": -113.325,
+                "longitude": 33.325
+        }
+    },
+    {
+            "id": 9823,
+            "status": "error",
+            "calibrated": 1522291320000,
+            "location": {
+                    "latitude": -111.625,
+                    "longitude": 35.625
+            }
+    }
+]
+}
