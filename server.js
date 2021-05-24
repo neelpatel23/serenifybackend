@@ -4,19 +4,32 @@ const moment = require('moment');
 const serenifyBase = express();
 const jwt = require('jsonwebtoken');
 const auth = require('./auth-middleware');
-const config = require('./config');
-// const MongoClient = require('mongodb').MongoClient
+const keys = require('./config');
+const mysql = require('mysql');
 const dailystories = require('./stories/dailystories.json');
 const dashboardData = require('./dashboard/home/dashboardata.json')
 let port = process.env.PORT || 8000;
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://neelp:<CSC603GwxtwjsXtm>@cluster0.bcu5n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
 serenifyBase.use(bodyParser.json());
 
 const todaysDate = moment().format('MMMM Do, YYYY');
+
+const con = mysql.createConnection({
+  host: keys.DB_INSTANCE_HOST,
+  user: keys.DB_INSTANCE_USER,
+  password: keys.DB_INSTANCE_KEY
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+
+  con.query('CREATE DATABASE IF NOT EXISTS main;');
+  con.query('USE main;');
+  con.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
+  });
+  // con.end();
+});
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -35,43 +48,33 @@ serenifyBase.get("/secure/token", (req, res) => {
     token: "JWT_SIGN"
   };
 
-  const token = jwt.sign(payload, config.JWT_SECRET);
+  const token = jwt.sign(payload, keys.JWT_SECRET);
   res.status(200)
   res.send(token)
 })
 
-serenifyBase.post("/users", (req, res) => {
-  MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-    if (err) return console.error(err);
-    const db = client.db('node-demo');
-    const collection = db.collection('users');
-    collection
-      .insertOne(req.body)
-      .then(() => {
-        res.redirect('/');
-      })
-      .catch(() => {
-        res.redirect('/');
+serenifyBase.post('/users', (req, res) => {
+  if (req.query.username && req.query.email && req.query.age) {
+      console.log('Request received');
+      con.connect(function(err) {
+          con.query(`INSERT INTO main.users (username, email, age) VALUES ('${req.query.username}', '${req.query.email}', '${req.query.age}')`, function(err, result, fields) {
+              if (err) res.send(err);
+              if (result) res.send({username: req.query.username, email: req.query.email, age: req.query.age});
+              if (fields) console.log(fields);
+          });
+      });
+  } else {
+      console.log('Missing a parameter');
+  }
+});
+
+serenifyBase.get('/users', (req, res) => {
+  con.connect(function(err) {
+      con.query(`SELECT * FROM main.users`, function(err, result, fields) {
+          if (err) res.send(err);
+          if (result) res.send(result);
       });
   });
-})
-
-serenifyBase.get("/users", auth(), (req, res) => {
-  res.send({
-    "name": "Neel Patel",
-    "age": 29,
-    "secretIdentity": "Dan Jukes",
-    "powers": [
-      "Radiation resistance",
-      "Turning tiny",
-      "Radiation blast"
-    ]
-  });
-})
-
-serenifyBase.post('/addusers', auth(), (req, res) => {
-  res.status(200)
-  res.send(`This is what I've received: ${req.body.results.name}`)
 });
 
 serenifyBase.get('/daily/serenity', (req, res) => {
