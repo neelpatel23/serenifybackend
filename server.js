@@ -15,6 +15,8 @@ serenifyBase.use(bodyParser.json());
 
 const todaysDate = moment().format('MMMM Do, YYYY');
 
+
+
 const con = mysql.createConnection({
   host: keys.DB_INSTANCE_HOST,
   user: keys.DB_INSTANCE_USER,
@@ -80,6 +82,26 @@ serenifyBase.get('/users', (req, res) => {
 serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
   res.send(dailystories)
+})
+
+serenifyBase.get('/background/morning', (req, res) => {
+  res.status(200)
+  res.send("https://cdn-0.idownloadblog.com/ezoimgfmt/media.idownloadblog.com/wp-content/uploads/2020/01/Colorful-vector-landscape-wallpapers-V24ByArthur1992aS-768x1662.png?ezimgfmt=ng:webp/ngcb34")
+})
+
+serenifyBase.get('/background/afternoon', (req, res) => {
+  res.status(200)
+  res.send("https://cdn-0.idownloadblog.com/ezoimgfmt/media.idownloadblog.com/wp-content/uploads/2019/09/mountain-valley-iphone-wallpaper-axellvak-sunset-deer-768x1731.jpg?ezimgfmt=ng:webp/ngcb34")
+})
+
+serenifyBase.get('/background/evening', (req, res) => {
+  res.status(200)
+  res.send("https://cdn-0.idownloadblog.com/ezoimgfmt/media.idownloadblog.com/wp-content/uploads/2019/09/mountain-valley-iphone-wallpaper-axellvak-night-mountain-deer-768x1731.jpg?ezimgfmt=ng:webp/ngcb34")
+})
+
+serenifyBase.get('/dash/rainymoods', (req, res) => {
+  res.status(206)
+  res.send("https://rainymood.com/audio1112/0.m4a")
 })
 
 serenifyBase.get('/dashboard_data', (req, res) => {
