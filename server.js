@@ -17,21 +17,21 @@ const todaysDate = moment().format('MMMM Do, YYYY');
 
 
 
-const con = mysql.createConnection({
-  host: keys.DB_INSTANCE_HOST,
-  user: keys.DB_INSTANCE_USER,
-  password: keys.DB_INSTANCE_KEY
-});
+// const con = mysql.createConnection({
+//   host: keys.DB_INSTANCE_HOST,
+//   user: keys.DB_INSTANCE_USER,
+//   password: keys.DB_INSTANCE_KEY
+// });
 
-con.connect(function(err) {
-  if (err) throw err;
+// con.connect(function(err) {
+//   if (err) throw err;
 
-  con.query('CREATE DATABASE IF NOT EXISTS main;');
-  con.query('USE main;');
-  con.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
-  });
-  // con.end();
-});
+//   con.query('CREATE DATABASE IF NOT EXISTS main;');
+//   con.query('USE main;');
+//   con.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
+//   });
+//   // con.end();
+// });
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -55,29 +55,29 @@ serenifyBase.get("/secure/token", (req, res) => {
   res.send(token)
 })
 
-serenifyBase.post('/users', (req, res) => {
-  if (req.query.username && req.query.email && req.query.age) {
-      console.log('Request received');
-      con.connect(function(err) {
-          con.query(`INSERT INTO main.users (username, email, age) VALUES ('${req.query.username}', '${req.query.email}', '${req.query.age}')`, function(err, result, fields) {
-              if (err) res.send(err);
-              if (result) res.send({username: req.query.username, email: req.query.email, age: req.query.age});
-              if (fields) console.log(fields);
-          });
-      });
-  } else {
-      console.log('Missing a parameter');
-  }
-});
+// serenifyBase.post('/users', (req, res) => {
+//   if (req.query.username && req.query.email && req.query.age) {
+//       console.log('Request received');
+//       con.connect(function(err) {
+//           con.query(`INSERT INTO main.users (username, email, age) VALUES ('${req.query.username}', '${req.query.email}', '${req.query.age}')`, function(err, result, fields) {
+//               if (err) res.send(err);
+//               if (result) res.send({username: req.query.username, email: req.query.email, age: req.query.age});
+//               if (fields) console.log(fields);
+//           });
+//       });
+//   } else {
+//       console.log('Missing a parameter');
+//   }
+// });
 
-serenifyBase.get('/users', (req, res) => {
-  con.connect(function(err) {
-      con.query(`SELECT * FROM main.users`, function(err, result, fields) {
-          if (err) res.send(err);
-          if (result) res.send(result);
-      });
-  });
-});
+// serenifyBase.get('/users', (req, res) => {
+//   con.connect(function(err) {
+//       con.query(`SELECT * FROM main.users`, function(err, result, fields) {
+//           if (err) res.send(err);
+//           if (result) res.send(result);
+//       });
+//   });
+// });
 
 serenifyBase.get('/daily/serenity', (req, res) => {
   res.status(200)
