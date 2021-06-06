@@ -5,7 +5,6 @@ const serenifyBase = express();
 const jwt = require('jsonwebtoken');
 const auth = require('./auth-middleware');
 const keys = require('./config');
-const mysql = require('mysql');
 const dailystories = require('./stories/dailystories.json');
 const dashboardData = require('./dashboard/home/dashboardata.json')
 let port = process.env.PORT || 8000;
