@@ -27,13 +27,14 @@ db.once('open', () => {
 
 const todaysDate = moment().format('MMMM Do, YYYY');
 
-serenifyBase.use('/api', AuthRoute)
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
+
+serenifyBase.use('/api', AuthRoute)
 
 serenifyBase.get("/", auth(), (req, res) => {
   res.status(401)
