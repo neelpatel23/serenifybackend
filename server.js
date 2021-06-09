@@ -1,36 +1,33 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose =  require('mongoose');
 const moment = require('moment');
 const serenifyBase = express();
 const jwt = require('jsonwebtoken');
 const auth = require('./auth-middleware');
 const keys = require('./config');
 const dailystories = require('./stories/dailystories.json');
-const dashboardData = require('./dashboard/home/dashboardata.json')
+const dashboardData = require('./dashboard/home/dashboardata.json');
+const AuthRoute = require('./routes/auth');
 let port = process.env.PORT || 8000;
 
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
 serenifyBase.use(bodyParser.json());
 
+mongoose.connect('mongodb+srv://neelp:5iFVIUuBIGLcPQMo@rejuvenate.bcu5n.mongodb.net/rejuvenate?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+const db = mongoose.connection
+
+db.on('error', (err) => {
+  console.log(err)
+})
+
+db.once('open', () => {
+  console.log('Database connection Established')
+})
+
 const todaysDate = moment().format('MMMM Do, YYYY');
 
-
-
-// const con = mysql.createConnection({
-//   host: keys.DB_INSTANCE_HOST,
-//   user: keys.DB_INSTANCE_USER,
-//   password: keys.DB_INSTANCE_KEY
-// });
-
-// con.connect(function(err) {
-//   if (err) throw err;
-
-//   con.query('CREATE DATABASE IF NOT EXISTS main;');
-//   con.query('USE main;');
-//   con.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
-//   });
-//   // con.end();
-// });
+serenifyBase.use('/api', AuthRoute)
 
 serenifyBase.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
