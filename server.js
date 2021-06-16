@@ -52,43 +52,23 @@ serenifyBase.get("/secure/token", (req, res) => {
   res.send(token)
 })
 
-// serenifyBase.post('/users', (req, res) => {
-//   if (req.query.username && req.query.email && req.query.age) {
-//       console.log('Request received');
-//       con.connect(function(err) {
-//           con.query(`INSERT INTO main.users (username, email, age) VALUES ('${req.query.username}', '${req.query.email}', '${req.query.age}')`, function(err, result, fields) {
-//               if (err) res.send(err);
-//               if (result) res.send({username: req.query.username, email: req.query.email, age: req.query.age});
-//               if (fields) console.log(fields);
-//           });
-//       });
-//   } else {
-//       console.log('Missing a parameter');
-//   }
-// });
-
-// serenifyBase.get('/users', (req, res) => {
-//   con.connect(function(err) {
-//       con.query(`SELECT * FROM main.users`, function(err, result, fields) {
-//           if (err) res.send(err);
-//           if (result) res.send(result);
-//       });
-//   });
-// });
-
-serenifyBase.get('/daily/serenity', (req, res) => {
+serenifyBase.get('/daily/serenity', async (req, res) => {
+  const dailySern = await dailystories
   res.status(200)
-  res.send(dailystories)
-})
-serenifyBase.get('/dash/rainymoods', (req, res) => {
-  res.status(206)
-  res.send("https://rainymood.com/audio1112/0.m4a")
+  res.send(dailySern)
 })
 
-serenifyBase.get('/dashboard_data', (req, res) => {
-  res.status(206)
-  res.send(dashboardData)
+serenifyBase.get('/dashboard/data', async (req, res) => {
+  const dashDat = await dashboardData
+  res.status(200)
+  res.send(dashDat)
 })
+serenifyBase.get('/dash/rainymoods', async (req, res) => {
+  const rainDat = await "https://rainymood.com/audio1112/0.m4a"
+  res.status(200)
+  res.send(rainDat)
+})
+
 serenifyBase.listen(port, () => {
   console.log(`Serenify Backend Server is running on port: ${port}`)
 })
