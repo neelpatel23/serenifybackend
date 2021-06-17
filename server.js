@@ -52,21 +52,9 @@ serenifyBase.get("/secure/token", (req, res) => {
   res.send(token)
 })
 
-serenifyBase.get('/daily/serenity', async (req, res) => {
-  const dailySern = await dailystories
+serenifyBase.get('/dashboard/data', (req, res) => {
   res.status(200)
-  res.send(dailySern)
-})
-
-serenifyBase.get('/dashboard/data', async (req, res) => {
-  const dashDat = await dashboardData
-  res.status(200)
-  res.send(dashDat)
-})
-serenifyBase.get('/dash/rainymoods', async (req, res) => {
-  const rainDat = await "https://rainymood.com/audio1112/0.m4a"
-  res.status(200)
-  res.send(rainDat)
+  res.send(dashboardData)
 })
 
 serenifyBase.listen(port, () => {
