@@ -9,6 +9,7 @@ const keys = require('./config');
 const dailystories = require('./stories/dailystories.json');
 const dashboardData = require('./dashboard/home/dashboardata.json');
 const AuthRoute = require('./routes/auth');
+const UserRoute = require('./routes/employee');
 let port = process.env.PORT || 8000;
 
 serenifyBase.use(bodyParser.urlencoded({ extended: true }));
@@ -35,6 +36,7 @@ serenifyBase.use((req, res, next) => {
 });
 
 serenifyBase.use('/api', AuthRoute)
+serenifyBase.use('/auth/users', UserRoute)
 
 serenifyBase.get("/", auth(), (req, res) => {
   res.status(401)
