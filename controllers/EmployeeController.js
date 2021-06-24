@@ -30,7 +30,7 @@ const show = (req, res, next) => {
     })
 }
 
-// Create New Employee
+// Create New usee
 
 const store = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
@@ -64,25 +64,27 @@ const store = (req, res, next) => {
 // Update User Info
 
 const update = (req, res, next) => {
-    let userID = req.body.userID
+    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
+        let userID = req.body.userID
 
-    let updatedData = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hashedPass,
-        designation: req.body.post
-    }
+        let updatedData = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: hashedPass,
+            designation: req.body.post
+        }
 
-    UserDetail.findByIdAndUpdate(userID, {$set: updatedData})
-    .then(() => {
-        res.json({
-            message: 'User Updated Successfully'
+        UserDetail.findByIdAndUpdate(userID, {$set: updatedData})
+        .then(() => {
+            res.json({
+                message: 'User Updated Successfully'
+            })
         })
-    })
-    .catch(error => {
-        res.json({
-            message: 'An unknown error occurred'
+        .catch(error => {
+            res.json({
+                message: 'An unknown error occurred'
+            })
         })
     })
 }
