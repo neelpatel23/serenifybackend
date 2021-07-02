@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('request');
 const mongoose =  require('mongoose');
 const moment = require('moment');
 const serenifyBase = express();
@@ -41,6 +42,11 @@ serenifyBase.use('/auth/users', UserRoute)
 serenifyBase.get("/", auth(), (req, res) => {
   res.status(401)
   res.send("You are unauthorized to access this endpoint, please contact your developer.")
+})
+
+serenifyBase.get("/custom", (req, res) => {
+  res.set('Content-Type', 'text/html')
+  res.send(Buffer.from('<div style={{ background: "pink", padding: "20" }}> <h1 style={{ marginTop: 100%, marginBottom: 0 }}>🌝</h1><h1 style={{ marginTop: "5" }}>A custom title can go here.</h1></div>'))
 })
 
 serenifyBase.get("/secure/token", (req, res) => {
