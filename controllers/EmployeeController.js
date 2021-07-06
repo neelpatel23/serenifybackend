@@ -30,7 +30,7 @@ const show = (req, res, next) => {
     })
 }
 
-// Create New usee
+// Create New User
 
 const store = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
@@ -44,13 +44,13 @@ const store = (req, res, next) => {
             lastname: req.body.lastname,
             email: req.body.email,
             password: hashedPass,
-            designation: req.body.post
+            designation: req.body.post,
+            isonboarded: false,
+            topics: req.body.topics
         })
         user.save()
         .then(response => {
-            res.json({
-                message: 'User Created Successfully \n\n Logging In'
-            })
+            res.send(response)
         })
         .catch(error => {
             res.json({
@@ -63,19 +63,15 @@ const store = (req, res, next) => {
 
 // Update User Info
 
-const update = (req, res, next) => {
+const updateTopics = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
         let userID = req.body.userID
 
-        let updatedData = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            password: hashedPass,
-            designation: req.body.post
+        let updatedTopics = {
+            topics: req.body.topics
         }
 
-        UserDetail.findByIdAndUpdate(userID, {$set: updatedData})
+        UserDetail.findByIdAndUpdate(userID, {$set: updatedTopics})
         .then(() => {
             res.json({
                 message: 'User Updated Successfully'
@@ -83,7 +79,7 @@ const update = (req, res, next) => {
         })
         .catch(error => {
             res.json({
-                message: 'An unknown error occurred'
+                error
             })
         })
     })
@@ -94,19 +90,19 @@ const update = (req, res, next) => {
 
 const destroy = (req, res, next) => {
     let userID = req.body.userID
-    UserDetail.findOneAndRemove(userID)
+    UserDetail.findByIdAndRemove(userID)
     .then(() => {
-        req.json({
+        res.json({
             message: 'User Deleted Successfully'
         })
     }) 
     .catch(error => {
-        req.json({
+        res.json({
             message: 'An unknown error occurred'
         })
     })
 }
 
 module.exports = {
-    index, show, store, update, destroy
+    index, show, store, updateTopics, destroy
 }

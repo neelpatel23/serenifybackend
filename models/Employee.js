@@ -16,6 +16,12 @@ const userDetail = new Schema({
     },
     designation: {
         type: String
+    },
+    isonboarded: {
+        type: Boolean
+    },
+    topics: {
+        type: Array
     }
 }, {timestamps: true})
 
