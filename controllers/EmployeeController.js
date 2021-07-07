@@ -68,6 +68,7 @@ const updateTopics = (req, res, next) => {
         let userID = req.body.userID
 
         let updatedTopics = {
+            isonboarded: req.body.status,
             topics: req.body.topics
         }
 
