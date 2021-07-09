@@ -29,6 +29,11 @@ const show = (req, res, next) => {
         })
     })
 }
+async function auth (req, res, next) {
+    let email = req.body.email
+    const foundUser = await UserDetail.findOne ({ "email" : 'neelp2023@gmail.com', "password": "Himalineel2" });
+    res.send(foundUser)
+}
 
 // Create New User
 
@@ -45,7 +50,7 @@ const store = (req, res, next) => {
             email: req.body.email,
             password: hashedPass,
             designation: req.body.post,
-            isonboarded: false,
+            isonboarded: 0,
             topics: req.body.topics
         })
         user.save()
@@ -64,15 +69,16 @@ const store = (req, res, next) => {
 // Update User Info
 
 const updateTopics = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
+    {
         let userID = req.body.userID
 
-        let updatedTopics = {
-            isonboarded: req.body.status,
+        let updateUserTop = {
+            onboardinglevel: req.body.stringstatus,
+            isonboarded: req.body.boolstatus,
             topics: req.body.topics
         }
 
-        UserDetail.findByIdAndUpdate(userID, {$set: updatedTopics})
+        UserDetail.findByIdAndUpdate(userID, {$set: updateUserTop})
         .then(() => {
             res.json({
                 message: 'User Updated Successfully'
@@ -83,8 +89,17 @@ const updateTopics = (req, res, next) => {
                 error
             })
         })
-    })
+    }
 }
+
+// const login = (req, res, next) => {
+//     {
+//     let email = req.body.email
+//     let password = req.body.password
+
+//     UserDetail.findOne({ email })
+//     }
+// }
 
 
 // delete an employee 
@@ -105,5 +120,5 @@ const destroy = (req, res, next) => {
 }
 
 module.exports = {
-    index, show, store, updateTopics, destroy
+    index, show, store, updateTopics, destroy, auth
 }

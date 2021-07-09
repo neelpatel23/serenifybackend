@@ -6,6 +6,7 @@ const UserController = require('../controllers/EmployeeController')
 router.get('/users', UserController.index)
 router.post('/show', UserController.show)
 router.post('/store', UserController.store)
+router.post('/auth', UserController.auth)
 router.post('/update', UserController.updateTopics)
 router.post('/delete', UserController.destroy)
 

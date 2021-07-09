@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt =  require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { auth } = require('./EmployeeController');
 
 const register = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
@@ -13,11 +14,14 @@ const register = (req, res, next) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: hashedPass
+            password: hashedPass,
+            onboardinglevel: 'none',
+            isonboarded: false,
+            topics: req.body.topics
         })
         user.save()
         .then(user => {
-            res.send("User Created Successfully!")
+            res.send(user)
         })
         .catch(error => {
             res.json({
@@ -28,11 +32,15 @@ const register = (req, res, next) => {
     })
 }
 
+// /auth/users/register
+// /auth/users/login
+// /auth/users/update
+
 const login = (req, res, next) => {
-    var username = req.body.username
+    var email = req.body.email
     var password = req.body.password
 
-    User.findOne({$or: [{email:username}]})
+    User.findOne({'email': email})
     .then(user => {
         if(user){
              bcrypt.compare(password, user.password, function(err, result){
@@ -42,9 +50,10 @@ const login = (req, res, next) => {
                       })
                   }
                   if(result){
-                    let token = jwt.sign({fistname: user.firstname}, 'password', {expiresIn: '1h'})
+                    let token = jwt.sign({fistname: user.firstname}, 'password', {expiresIn: '7d'})
                     res.json({
                         message: "Login Succeded",
+                        user,
                         token
                     })
                   }else{
@@ -55,12 +64,36 @@ const login = (req, res, next) => {
              })
         }else{
             res.json({
-                message: "No User Exists"
+                message: "Incorrect Email/Password"
             })
         }
     })
 }
 
+const update = (req, res, next) => {
+    {
+        let userID = req.body.userID
+
+        let updateUserTop = {
+            onboardinglevel: req.body.stringstatus,
+            isonboarded: req.body.boolstatus,
+            topics: req.body.topics
+        }
+
+        User.findByIdAndUpdate(userID, {$set: updateUserTop})
+        .then(() => {
+            res.json({
+                message: 'User Updated Successfully'
+            })
+        })
+        .catch(error => {
+            res.json({
+                error
+            })
+        })
+    }
+}
+
 module.exports = {
-    register, login
+    register, login, update
 }

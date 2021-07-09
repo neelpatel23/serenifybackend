@@ -13,6 +13,15 @@ const userSchema = new Schema({
     },
     password: {
         type: String
+    },
+    onboardinglevel: {
+        type: String
+    },
+    isonboarded: {
+        type: Boolean
+    },
+    topics: {
+        type: Array
     }
 }, {timestamps: true})
 

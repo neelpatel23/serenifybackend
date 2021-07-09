@@ -17,6 +17,9 @@ const userDetail = new Schema({
     designation: {
         type: String
     },
+    onboardinglevel: {
+        type: String
+    },
     isonboarded: {
         type: Boolean
     },
