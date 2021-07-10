@@ -96,7 +96,7 @@ const update = (req, res, next) => {
 
 const findUserDetails = (req, res, next) => {
     let userID = req.body.userID
-    UserDetail.findById(userID)
+    User.findById(userID)
     .then(response => {
         res.json({
             response
