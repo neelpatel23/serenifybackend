@@ -94,6 +94,21 @@ const update = (req, res, next) => {
     }
 }
 
+const findUserDetails = (req, res, next) => {
+    let userID = req.body.userID
+    UserDetail.findById(userID)
+    .then(response => {
+        res.json({
+            response
+        })
+    })
+    .catch(error => {
+        res.json({
+            message: 'An Unknown Error Occurred '
+        })
+    })
+}
+
 module.exports = {
-    register, login, update
+    register, login, update, findUserDetails
 }
