@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const bcrypt =  require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { auth } = require('./EmployeeController');
 
 const register = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
@@ -15,13 +14,20 @@ const register = (req, res, next) => {
             lastname: req.body.lastname,
             email: req.body.email,
             password: hashedPass,
+            firebaseID: req.body.firebaseID,
             onboardinglevel: 'none',
             isonboarded: false,
             topics: req.body.topics
         })
         user.save()
         .then(user => {
-            res.send(user)
+            let token = jwt.sign(user.email, 'password')
+            res.json({
+                message: 'User Created Successfully',
+                message0: user._id,
+                token,
+                user
+            })
         })
         .catch(error => {
             res.json({
@@ -50,7 +56,7 @@ const login = (req, res, next) => {
                       })
                   }
                   if(result){
-                    let token = jwt.sign({fistname: user.firstname}, 'password', {expiresIn: '7d'})
+                    let token = jwt.sign({fistname: user.firstname}, 'password')
                     res.json({
                         message: "Login Succeded",
                         user,
@@ -58,7 +64,7 @@ const login = (req, res, next) => {
                     })
                   }else{
                       res.json({
-                          message: "Password do not match"
+                          message: "Incorrect Email and or Password"
                       })
                   }
              })

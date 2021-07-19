@@ -1,13 +1,13 @@
 {
   "name": "serenifybackend",
-  "version": "1.29.0",
-  "description": "Serenify Backend",
+  "version": "1.30.0",
+  "description": "Zent Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Neel Patel, Serenify Inc",
+  "author": "Neel Patel, Zent LLC",
   "license": "ISC",
   "dependencies": {
     "@okta/jwt-verifier": "^2.1.0",
