@@ -1,24 +1,15 @@
 {
   "data": {
-    "header": [
-      {
-        "topic":"Transcendal Meditation",
-        "time": "7:00 a.m"
-      },
-      {
-        "topic":"Zen Meditation"
-      },
-      {
-        "topic2":"Ramdev Meditation"
-      }
-    ],
-    "stories": [
-      "https://example.com/pic.jpg",
-      {
-        "url": "https://pause.sfo2.cdn.digitaloceanspaces.com/Other/Adhiveshan%20Website/Stories/KM/Divine-Moods/Divine%20Moods%20%283_21%29.mp4",
-        "duration": "5000",
-        "type": "video"
-      }
-    ]
+    "one":{
+      "topic":"Rise Up",
+      "duration": "5-6 MIN",
+      "subtopic": "Recommended in the morning, just after waking up",
+      "url": "https://neelp.sfo3.cdn.digitaloceanspaces.com/zent/assets/dashboard/morning/morning1.mp4"
+    },
+    "two": {
+      "topic":"Relaxation",
+      "duration": "5 - 6 Min",
+      "url": "https://neelp.sfo3.cdn.digitaloceanspaces.com/zent/assets/dashboard/basics/5%20Minute%20Mindfulness%20Meditation_720P%20HD.mp4"
+    }
   }
 }
