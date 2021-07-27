@@ -17,6 +17,7 @@ const register = (req, res, next) => {
             firebaseID: req.body.firebaseID,
             onboardinglevel: 'none',
             isonboarded: false,
+            pushNotifications: '0',
             topics: req.body.topics
         })
         user.save()
@@ -83,7 +84,8 @@ const update = (req, res, next) => {
         let updateUserTop = {
             onboardinglevel: req.body.stringstatus,
             isonboarded: req.body.boolstatus,
-            topics: req.body.topics
+            topics: req.body.topics,
+            pushNotifications: req.body.notifs
         }
 
         User.findByIdAndUpdate(userID, {$set: updateUserTop})

@@ -17,6 +17,9 @@ const userSchema = new Schema({
     firebaseID: {
         type: String
     },
+    pushNotifications: {
+        type: String
+    },
     onboardinglevel: {
         type: String
     },
